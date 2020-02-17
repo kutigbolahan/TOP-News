@@ -32,6 +32,8 @@ class _HomePageState extends State<HomePage> {
     getnews();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +46,8 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(color: Colors.black),
         )),
       ),
-      body: SafeArea(
+       body:
+      SafeArea(
         child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 20.0,

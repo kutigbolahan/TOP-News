@@ -58,6 +58,15 @@ class Article{
 
   });
   factory Article.fromJson(Map<String, dynamic> json)=>
+    
+  
   _$ArticleFromJson(json);
   Map<String, dynamic> toJson() => _$ArticleToJson(this);
 }
+// factory Chat.fromJson(Map<String, dynamic> json) {
+//     json["members"] = (json['members'] as List)
+//           ?.map((e) =>
+//               e == null ? null : Map<String, dynamic>.from(e))
+//           ?.toList();
+//      return _$ChatFromJson(json);  
+//   }
