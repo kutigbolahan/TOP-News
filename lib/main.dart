@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nigeriannews/hompage.dart';
+
+import 'package:nigeriannews/views/hompage.dart';
 
 void main() => runApp(MyApp());
 
