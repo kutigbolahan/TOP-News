@@ -66,7 +66,7 @@ import 'dart:convert';
 //   AppState._(){
 //     _updateNewsArticle(_newsArticleType);
 //   }
-  
+
 //   factory AppState() {
 //     return AppState._();
 //   }
@@ -74,7 +74,7 @@ import 'dart:convert';
 //   List<News>get neews{
 //     if (_newsArticleType == NewsArticleType.SportArticles) {
 //       // return ;
-      
+
 //     }
 //   }
 
@@ -162,8 +162,9 @@ import 'dart:convert';
 //   }
 // }
 
-class HttpService {
-  static Future<News> getSportsNews() async {
+class HttpService with ChangeNotifier {
+ static Future<News> getSportsNews() async {
+   
     final String sportsurl =
         'http://newsapi.org/v2/top-headlines?country=gb&category=sports&apiKey=7b2380f2052e4b2c9223e21021914f2e';
     //naija news
@@ -172,18 +173,21 @@ class HttpService {
 
     News sportsnews = standardSerializers.deserializeWith(
         News.serializer, jsonDecode(res.body));
-
+    
     print("SportsNews total" + sportsnews.totalResults.toString());
     return sportsnews;
   }
 
-  static Future<News> getHealthNews() async{
-    final String healthurl= 
+ static Future<News> getHealthNews() async {
+   
+    final String healthurl =
         'http://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=7b2380f2052e4b2c9223e21021914f2e';
-        final res = await http.get(healthurl);
+    final res = await http.get(healthurl);
 
-        News healthnews = standardSerializers.deserializeWith(News.serializer, jsonDecode(res.body));
-        print("HealthNews total" + healthnews.totalResults.toString());
-        return healthnews;
+    News healthnews = standardSerializers.deserializeWith(
+        News.serializer, jsonDecode(res.body));
+    
+    print("HealthNews total" + healthnews.totalResults.toString());
+    return healthnews;
   }
 }

@@ -139,11 +139,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+int _currentindex =0;
   Future<News> sportsnews;
+  Future<News> healthnews;
   @override
   void initState() {
     sportsnews = HttpService.getSportsNews();
+    healthnews = HttpService.getHealthNews();
     super.initState();
   }
 
@@ -184,7 +186,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                  itemCount: 10, //snapshot.data.articles.length,
+                  itemCount: snapshot.data.articles.length,
                   itemBuilder: (context, index) {
                     return ExpansionTile(
                       title: Text(snapshot.data.articles[index].title,
@@ -230,6 +232,7 @@ class _HomePageState extends State<HomePage> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentindex,
           backgroundColor: Colors.black,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
@@ -243,7 +246,20 @@ class _HomePageState extends State<HomePage> {
               title: Text('Health'),
             ),
             
-          ]),
+          ],
+          onTap: (index){
+            if (index == 0) {
+               sportsnews = HttpService.getSportsNews();
+    
+            }else{
+              assert(index == 1);
+              healthnews = HttpService.getHealthNews();
+            }
+            setState(() {
+              _currentindex = index;
+            });
+          },
+          ),
     );
   }
 }
