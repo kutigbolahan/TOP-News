@@ -140,10 +140,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  Future<News> news;
+  Future<News> sportsnews;
   @override
   void initState() {
-    news = HttpService.getNews();
+    sportsnews = HttpService.getSportsNews();
     super.initState();
   }
 
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: FutureBuilder<News>(
-          future: news,
+          future: sportsnews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
