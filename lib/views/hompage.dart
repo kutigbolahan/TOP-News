@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nigeriannews/model/articles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/themestate.dart';
 
 import 'package:nigeriannews/viewsmodel/news.dart';
@@ -242,19 +243,19 @@ int _currentindex =0;
               title: Text('Sports'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.healing),
+              
+              icon: IconButton(
+                icon: Icon(Icons.healing),
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Health()));
+                },
+              ),
               title: Text('Health'),
             ),
             
           ],
           onTap: (index){
-            if (index == 0) {
-               sportsnews = HttpService.getSportsNews();
-    
-            }else{
-              assert(index == 1);
-              healthnews = HttpService.getHealthNews();
-            }
+           
             setState(() {
               _currentindex = index;
             });
