@@ -1,8 +1,8 @@
-import 'dart:convert' as json;
+
 import 'package:built_value/built_value.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
-import 'package:nigeriannews/model/serializers.dart';
+
 
 part 'articles.g.dart';
 
