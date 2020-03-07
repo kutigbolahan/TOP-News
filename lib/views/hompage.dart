@@ -5,10 +5,11 @@ import 'package:nigeriannews/model/articles.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/themestate.dart';
-import 'package:day_night_switch/day_night_switch.dart';
+//import 'package:day_night_switch/day_night_switch.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 // class HomePage extends StatefulWidget {
 //   HomePage({Key key}) : super(key: key);
@@ -140,19 +141,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-int _currentindex =0;
+  int _currentindex = 0;
   Future<News> sportsnews;
-  
+
   @override
   void initState() {
     sportsnews = HttpService.getSportsNews();
-    
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier= Provider.of<ThemeNotifier>(context);
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -171,26 +172,11 @@ int _currentindex =0;
         ),
         actions: <Widget>[
           Switch(
-             activeColor: Colors.black,
+              activeColor: Colors.black,
               value: themeNotifier.isdarkTheme,
-             onChanged: (value){
-               
-               
-                 themeNotifier.setThemeData =value ;
-               
-             }
-             )
-          // Container(
-          //   width: 170,
-          
-          //   child: DayNightSwitch(
-          //     value: themeNotifier.isLightTheme,
-          //    onChanged: (value){
-          //       setState(() {
-          //         value= themeNotifier.setThemeData=value;
-          //       });
-          //    }),
-          // )
+              onChanged: (value) {
+                themeNotifier.setThemeData = value;
+              })
         ],
       ),
       body: FutureBuilder<News>(
@@ -206,15 +192,19 @@ int _currentindex =0;
                       leading: Container(
                           width: 70,
                           height: 70,
-                          child: Image.network(
-                            snapshot.data.articles[index].urlToImage,
+                          child:snapshot.data.articles[index].urlToImage !=null ? CachedNetworkImage(
+                            imageUrl: snapshot.data.articles[index].urlToImage ,
                             fit: BoxFit.contain,
-                          )),
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                          ): Container()
+                          
+                          ),
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                           // Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
+                            // Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
                             IconButton(
                               icon: Icon(
                                 Icons.launch,
@@ -245,33 +235,31 @@ int _currentindex =0;
           }),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
-          backgroundColor: Colors.black,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.directions_run),
-              title: Text('Sports'),
-            ),
-            BottomNavigationBarItem(
-              
-              icon: IconButton(
-                icon: Icon(Icons.healing),
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Health()));
-                },
-              ),
-              title: Text('Health'),
-            ),
-            
-          ],
-          onTap: (index){
-           
-            setState(() {
-              _currentindex = index;
-            });
-          },
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.directions_run),
+            title: Text('Sports'),
           ),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(Icons.healing),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Health()));
+              },
+            ),
+            title: Text('Health'),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentindex = index;
+          });
+        },
+      ),
     );
   }
 }

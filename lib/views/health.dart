@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,7 +49,7 @@ int _currentindex =1;
         ),
         actions: <Widget>[
           Switch(
-             activeColor: Colors.white,
+             activeColor: Colors.black,
               value: themeNotifier.isdarkTheme,
              onChanged: (value){
                
@@ -69,13 +70,17 @@ int _currentindex =1;
                     return ExpansionTile(
                       title: Text(snapshot.data.articles[index].title,
                           style: GoogleFonts.cormorantGaramond()),
-                      leading: Container(
+                      leading:Container(
                           width: 70,
                           height: 70,
-                          child: Image.network(
-                            snapshot.data.articles[index].urlToImage,
+                          child:snapshot.data.articles[index].urlToImage !=null ? CachedNetworkImage(
+                            imageUrl: snapshot.data.articles[index].urlToImage ,
                             fit: BoxFit.contain,
-                          )),
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                          ): Container()
+                          
+                          ),
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

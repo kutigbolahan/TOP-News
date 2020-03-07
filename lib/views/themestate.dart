@@ -21,21 +21,14 @@ final lightTheme = ThemeData(
 );
 
 class ThemeNotifier with ChangeNotifier{
-  // ThemeData _themeData;
-  // ThemeNotifier(this._themeData);
-
-  // getTheme()=> _themeData;
-  // setTheme(ThemeData themeData) async{
-  //   _themeData = themeData;
-  //   notifyListeners();
-  // }
+  
    bool isdarkTheme;
 
   ThemeNotifier({this.isdarkTheme});
 
   ThemeData get getThemeData => isdarkTheme ? darkTheme : lightTheme;
 
-  set setThemeData(bool val) {
+ set setThemeData(bool val) {
     if (val) {
       isdarkTheme = true;
     } else {

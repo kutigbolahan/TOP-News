@@ -32,6 +32,7 @@ dependencies:
   google_fonts: ^0.3.9
   day_night_switch:
   shared_preferences:  
+  cached_network_image:
   
 
 dev_dependencies:
