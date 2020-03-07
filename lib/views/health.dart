@@ -47,16 +47,16 @@ int _currentindex =1;
           ),
         ),
         actions: <Widget>[
-          Switch(
-              //activeColor: Colors.red,
-              value: Provider.of<ThemeState>(context).theme == ThemeType.DARK,
-             onChanged: (value){
-               Provider.of<ThemeState>(context).theme= value?ThemeType.DARK :ThemeType.LIGHT;
-               setState(() {
+          // Switch(
+          //     //activeColor: Colors.red,
+          //     value: Provider.of<ThemeState>(context).theme == ThemeType.DARK,
+          //    onChanged: (value){
+          //      Provider.of<ThemeState>(context).theme= value?ThemeType.DARK :ThemeType.LIGHT;
+          //      setState(() {
                  
-               });
-             }
-             )
+          //      });
+          //    }
+          //    )
         ],
       ),
       body: FutureBuilder<News>(

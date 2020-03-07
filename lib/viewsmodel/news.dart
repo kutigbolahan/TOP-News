@@ -190,4 +190,5 @@ class HttpService with ChangeNotifier {
     print("HealthNews total" + healthnews.totalResults.toString());
     return healthnews;
   }
+ 
 }
