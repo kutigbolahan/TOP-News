@@ -30,6 +30,8 @@ dependencies:
   intl: ^0.16.0
   provider: ^4.0.4
   google_fonts: ^0.3.9
+  day_night_switch:
+  shared_preferences:  
   
 
 dev_dependencies:

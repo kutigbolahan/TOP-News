@@ -5,7 +5,7 @@ import 'package:nigeriannews/model/articles.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/themestate.dart';
-
+import 'package:day_night_switch/day_night_switch.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -142,17 +142,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 int _currentindex =0;
   Future<News> sportsnews;
-  Future<News> healthnews;
+  
   @override
   void initState() {
     sportsnews = HttpService.getSportsNews();
-    healthnews = HttpService.getHealthNews();
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
+    final themeNotifier= Provider.of<ThemeNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -170,16 +170,27 @@ int _currentindex =0;
           ),
         ),
         actions: <Widget>[
-          // Switch(
-          //     //activeColor: Colors.red,
-          //     value: Provider.of<ThemeState>(context).theme == ThemeType.DARK,
+          Switch(
+             activeColor: Colors.black,
+              value: themeNotifier.isdarkTheme,
+             onChanged: (value){
+               
+               
+                 themeNotifier.setThemeData =value ;
+               
+             }
+             )
+          // Container(
+          //   width: 170,
+          
+          //   child: DayNightSwitch(
+          //     value: themeNotifier.isLightTheme,
           //    onChanged: (value){
-          //      Provider.of<ThemeState>(context).theme= value?ThemeType.DARK :ThemeType.LIGHT;
-          //      setState(() {
-                 
-          //      });
-          //    }
-          //    )
+          //       setState(() {
+          //         value= themeNotifier.setThemeData=value;
+          //       });
+          //    }),
+          // )
         ],
       ),
       body: FutureBuilder<News>(
@@ -203,7 +214,7 @@ int _currentindex =0;
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
+                           // Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
                             IconButton(
                               icon: Icon(
                                 Icons.launch,

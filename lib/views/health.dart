@@ -29,7 +29,7 @@ int _currentindex =1;
 
   @override
   Widget build(BuildContext context) {
-    
+    final themeNotifier= Provider.of<ThemeNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -47,16 +47,16 @@ int _currentindex =1;
           ),
         ),
         actions: <Widget>[
-          // Switch(
-          //     //activeColor: Colors.red,
-          //     value: Provider.of<ThemeState>(context).theme == ThemeType.DARK,
-          //    onChanged: (value){
-          //      Provider.of<ThemeState>(context).theme= value?ThemeType.DARK :ThemeType.LIGHT;
-          //      setState(() {
-                 
-          //      });
-          //    }
-          //    )
+          Switch(
+             activeColor: Colors.white,
+              value: themeNotifier.isdarkTheme,
+             onChanged: (value){
+               
+               
+                 themeNotifier.setThemeData =value ;
+               
+             }
+             )
         ],
       ),
       body: FutureBuilder<News>(

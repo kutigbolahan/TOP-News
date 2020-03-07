@@ -7,7 +7,8 @@ final darkTheme = ThemeData(
   backgroundColor: const Color(0xff212121),
   accentColor: Colors.white,
   accentIconTheme: IconThemeData(color:Colors.black),
-  dividerColor: Colors.black12
+  dividerColor: Colors.black12,
+  
 );
 final lightTheme = ThemeData(
   primarySwatch: Colors.grey,
@@ -20,13 +21,28 @@ final lightTheme = ThemeData(
 );
 
 class ThemeNotifier with ChangeNotifier{
-  ThemeData _themeData;
-  ThemeNotifier(this._themeData);
+  // ThemeData _themeData;
+  // ThemeNotifier(this._themeData);
 
-  getTheme()=> _themeData;
-  setTheme(ThemeData themeData) async{
-    _themeData = themeData;
+  // getTheme()=> _themeData;
+  // setTheme(ThemeData themeData) async{
+  //   _themeData = themeData;
+  //   notifyListeners();
+  // }
+   bool isdarkTheme;
+
+  ThemeNotifier({this.isdarkTheme});
+
+  ThemeData get getThemeData => isdarkTheme ? darkTheme : lightTheme;
+
+  set setThemeData(bool val) {
+    if (val) {
+      isdarkTheme = true;
+    } else {
+      isdarkTheme = false;
+    }
     notifyListeners();
   }
+
   
 }

@@ -6,7 +6,7 @@ import 'package:nigeriannews/views/hompage.dart';
 void main() => runApp(MultiProvider(
   providers: [
      ChangeNotifierProvider<ThemeNotifier>(
-          create: (context) => ThemeNotifier(lightTheme),
+          create: (context) => ThemeNotifier(isdarkTheme: true),
         )
   ],
   child: MyApp()
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     final themeNotifier= Provider.of<ThemeNotifier>(context);
     return MaterialApp(
         title: 'Flutter Demo',
-      theme: themeNotifier.getTheme(),
+      theme: themeNotifier.getThemeData,
         home: HomePage(),
         debugShowCheckedModeBanner: false,
       );
