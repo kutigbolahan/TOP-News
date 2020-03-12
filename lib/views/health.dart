@@ -11,26 +11,24 @@ import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Health extends StatefulWidget {
   @override
   _HealthState createState() => _HealthState();
 }
 
 class _HealthState extends State<Health> {
-int _currentindex =1;
-  
+  int _currentindex = 1;
+
   Future<News> healthnews;
   @override
   void initState() {
-    
     healthnews = HttpService.getHealthNews();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeNotifier= Provider.of<ThemeNotifier>(context);
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -49,15 +47,11 @@ int _currentindex =1;
         ),
         actions: <Widget>[
           Switch(
-             activeColor: Colors.white,
+              activeColor: Colors.white,
               value: themeNotifier.isdarkTheme,
-             onChanged: (value){
-               
-               
-                 themeNotifier.setThemeData =value ;
-               
-             }
-             )
+              onChanged: (value) {
+                themeNotifier.setThemeData = value;
+              })
         ],
       ),
       body: FutureBuilder<News>(
@@ -70,22 +64,31 @@ int _currentindex =1;
                     return ExpansionTile(
                       title: Text(snapshot.data.articles[index].title,
                           style: GoogleFonts.cormorantGaramond()),
-                      leading:Container(
+                      leading: Container(
                           width: 70,
                           height: 70,
-                          child:snapshot.data.articles[index].urlToImage !=null ? CachedNetworkImage(
-                            imageUrl: snapshot.data.articles[index].urlToImage ,
-                            fit: BoxFit.contain,
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                          ): Container()
-                          
-                          ),
+                          child: snapshot.data.articles[index].urlToImage !=
+                                  null
+                              ? CachedNetworkImage(
+                                  imageUrl:
+                                      snapshot.data.articles[index].urlToImage,
+                                  fit: BoxFit.contain,
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                )
+                              : Container()),
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
+                            Flexible(
+                              flex: 5,
+                              child: Text(
+                                'Author: ${snapshot.data.articles[index].author ?? 0} ',
+                                maxLines: 2,
+                                overflow: TextOverflow.clip,
+                              ),
+                            ),
                             IconButton(
                               icon: Icon(
                                 Icons.launch,
@@ -116,32 +119,34 @@ int _currentindex =1;
           }),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentindex,
-          backgroundColor: Colors.black,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-               icon: IconButton(
-                icon: Icon(Icons.directions_run),
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
-                },
-              ),
-              title: Text('Sports',style: GoogleFonts.cherrySwash(),),
+        backgroundColor: Colors.black,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(Icons.directions_run),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => HomePage()));
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.healing),
-              title: Text('Health',style: GoogleFonts.cherrySwash()),
+            title: Text(
+              'Sports',
+              style: GoogleFonts.cherrySwash(),
             ),
-            
-          ],
-          onTap: (index){
-           
-            setState(() {
-              _currentindex = index;
-            });
-          },
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.healing),
+            title: Text('Health', style: GoogleFonts.cherrySwash()),
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentindex = index;
+          });
+        },
+      ),
     );
   }
 }
