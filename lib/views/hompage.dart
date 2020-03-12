@@ -11,130 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-// class HomePage extends StatefulWidget {
-//   HomePage({Key key}) : super(key: key);
-
-//   @override
-//   _HomePageState createState() => _HomePageState();
-// }
-
-// class _HomePageState extends State<HomePage> {
-//   bool isLoading;
-//   var newsList;
-
-//   void getnews() async {
-//     News news = News();
-//     await news.getNews();
-//     setState(() {
-//       isLoading = false;
-//       newsList = news.news;
-//     });
-//   }
-
-//   @override
-//   void initState() {
-//     isLoading = true;
-//     super.initState();
-//     getnews();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         elevation: 0,
-//         backgroundColor: Colors.white,
-//         title: Center(
-//             child: Text(
-//           'TopNews',
-//           style: TextStyle(color: Colors.black),
-//         )),
-//       ),
-//        body:
-//       SafeArea(
-//         child: Padding(
-//             padding: EdgeInsets.symmetric(
-//               horizontal: 20.0,
-//             ),
-//             child: isLoading
-//                 ? Center(
-//                     child: CircularProgressIndicator(),
-//                   )
-//                 : Column(
-//                     children: <Widget>[
-
-//                       Expanded(
-//                         child: ListView.builder(
-//                           itemCount: newsList.length,
-//                           itemBuilder: (context, index) {
-//                             return ExpansionTile(
-//                               title: Text(newsList[index].title),
-//                               children: <Widget>[
-//                                 Padding(
-//                                   padding: EdgeInsets.symmetric(horizontal: 16),
-//                                   child: Column(
-//                                     children: <Widget>[
-//                                       Row(
-//                                         mainAxisAlignment:
-//                                             MainAxisAlignment.center,
-//                                         children: <Widget>[
-
-//                                           IconButton(
-//                                               icon: Icon(Icons.launch),
-//                                               onPressed: () async{
-//                                                 final fakeurl =
-//                                                     "${newsList[index].url}";
-//                                                 if (await canLaunch(fakeurl)) {
-//                                                   launch(fakeurl);
-//                                                 }else{
-//                                                   throw 'could not launch url';
-//                                                 }
-
-//                                               })
-//                                           // Text( newsList[index].url)
-//                                         ],
-//                                       )
-//                                     ],
-//                                   ),
-//                                 )
-//                               ],
-
-//                               // subtitle: Text(
-//                               //  newsList[index].url
-//                               // ),
-//                               leading:
-//                                   Container(
-//                                     width: 70,
-//                                     height: 70,
-//                                     child: Image.network(newsList[index].urlToImage,
-//                                     fit: BoxFit.contain,
-//                                     ),
-//                                   ),
-//                             );
-//                           },
-//                         ),
-//                       ),
-//                     ],
-//                   )),
-//       ),
-//       bottomNavigationBar: CupertinoTabBar(
-
-//         backgroundColor: Colors.black,
-//         activeColor: Colors.white,
-//          items:  [
-//       BottomNavigationBarItem(
-//         icon: Icon(Icons.event_note),
-//         title: Text('Naija news')
-//       ),
-//       BottomNavigationBarItem(
-//         icon: Icon(Icons.extension),
-//         title: Text('Foreign news')
-//       ),
-//       ]),
-//     );
-//   }
-// }
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -158,21 +34,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         leading: Icon(
           Icons.flare,
-          color: Colors.red,
+          color: Colors.white,
         ),
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         title: Center(
           child: Text(
             'Top News',
             style: GoogleFonts.cherrySwash(
-              textStyle: TextStyle(color: Colors.red),
+              textStyle: TextStyle(color: Colors.white),
             ),
           ),
         ),
         actions: <Widget>[
           Switch(
-              activeColor: Colors.black,
+              activeColor: Colors.white,
               value: themeNotifier.isdarkTheme,
               onChanged: (value) {
                 themeNotifier.setThemeData = value;
@@ -192,19 +68,23 @@ class _HomePageState extends State<HomePage> {
                       leading: Container(
                           width: 70,
                           height: 70,
-                          child:snapshot.data.articles[index].urlToImage !=null ? CachedNetworkImage(
-                            imageUrl: snapshot.data.articles[index].urlToImage ,
-                            fit: BoxFit.contain,
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                          ): Container()
-                          
-                          ),
+                          child: snapshot.data.articles[index].urlToImage !=
+                                  null
+                              ? CachedNetworkImage(
+                                  imageUrl:
+                                      snapshot.data.articles[index].urlToImage,
+                                  fit: BoxFit.contain,
+                                  placeholder: (context, url) => Container(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator()),
+                                )
+                              : Container()),
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            // Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
+                             Text('Author: ${snapshot.data.articles[index].author ?? 0 } '),
                             IconButton(
                               icon: Icon(
                                 Icons.launch,
@@ -241,7 +121,7 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_run),
-            title: Text('Sports'),
+            title: Text('Sports',style: GoogleFonts.cherrySwash()),
           ),
           BottomNavigationBarItem(
             icon: IconButton(
@@ -251,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                     .push(MaterialPageRoute(builder: (context) => Health()));
               },
             ),
-            title: Text('Health'),
+            title: Text('Health',style: GoogleFonts.cherrySwash()),
           ),
         ],
         onTap: (index) {

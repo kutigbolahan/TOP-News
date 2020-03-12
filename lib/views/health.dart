@@ -35,21 +35,21 @@ int _currentindex =1;
       appBar: AppBar(
         leading: Icon(
           Icons.flare,
-          color: Colors.red,
+          color: Colors.white,
         ),
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         title: Center(
           child: Text(
             'Top News',
             style: GoogleFonts.cherrySwash(
-              textStyle: TextStyle(color: Colors.red),
+              textStyle: TextStyle(color: Colors.white),
             ),
           ),
         ),
         actions: <Widget>[
           Switch(
-             activeColor: Colors.black,
+             activeColor: Colors.white,
               value: themeNotifier.isdarkTheme,
              onChanged: (value){
                
@@ -127,11 +127,11 @@ int _currentindex =1;
                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomePage()));
                 },
               ),
-              title: Text('Sports'),
+              title: Text('Sports',style: GoogleFonts.cherrySwash(),),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.healing),
-              title: Text('Health'),
+              title: Text('Health',style: GoogleFonts.cherrySwash()),
             ),
             
           ],
