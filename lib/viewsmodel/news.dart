@@ -36,5 +36,24 @@ class HttpService with ChangeNotifier {
     print("HealthNews total" + healthnews.totalResults.toString());
     return healthnews;
   }
+
+  static Future<News> getEntertainmentNews()async{
+   final String entertainUrl = 'http://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=7b2380f2052e4b2c9223e21021914f2e';
+   final res =await http.get(entertainUrl);
+
+   News entertainnews = standardSerializers.deserializeWith(News.serializer, jsonDecode(res.body));
+
+   print("entertainNews total" + entertainnews.totalResults.toString());
+   return entertainnews;
+  }
+  static Future<News> getTechnologyNews()async{
+   final String techUrl = 'http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=7b2380f2052e4b2c9223e21021914f2e';
+   final res =await http.get(techUrl);
+
+   News technologynews = standardSerializers.deserializeWith(News.serializer, jsonDecode(res.body));
+
+   print("entertainNews total" + technologynews.totalResults.toString());
+   return technologynews;
+  }
  
 }

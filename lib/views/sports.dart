@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:nigeriannews/model/articles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nigeriannews/views/entertainment.dart';
 import 'package:nigeriannews/views/health.dart';
+import 'package:nigeriannews/views/tech.dart';
 import 'package:nigeriannews/views/themestate.dart';
 //import 'package:day_night_switch/day_night_switch.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
@@ -11,13 +13,13 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class HomePage extends StatefulWidget {
+class SportsPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _SportsPageState createState() => _SportsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  int _currentindex = 0;
+class _SportsPageState extends State<SportsPage> {
+  int _currentindex ;
   Future<News> sportsnews;
 
   @override
@@ -132,6 +134,26 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             title: Text('Health',style: GoogleFonts.cherrySwash()),
+          ),
+           BottomNavigationBarItem(
+            icon: IconButton(
+              icon:Icon(Icons.disc_full),
+             onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Entertainment()));
+              },
+            ),
+            title: Text('Entertainment', style: GoogleFonts.cherrySwash()),
+          ),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: Icon(Icons.computer),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TechPage()));
+              },
+            ),
+            title: Text('Tech', style: GoogleFonts.cherrySwash()),
           ),
         ],
         onTap: (index) {

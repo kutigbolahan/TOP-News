@@ -1,34 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:nigeriannews/model/articles.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nigeriannews/model/articles.dart';
 import 'package:nigeriannews/views/entertainment.dart';
-
+import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/sports.dart';
-import 'package:nigeriannews/views/tech.dart';
 import 'package:nigeriannews/views/themestate.dart';
-
-import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Health extends StatefulWidget {
+class TechPage extends StatefulWidget {
   @override
-  _HealthState createState() => _HealthState();
+  _TechPageState createState() => _TechPageState();
 }
 
-class _HealthState extends State<Health> {
-  int _currentindex ;
+class _TechPageState extends State<TechPage> {
+  int _currentindex;
 
-  Future<News> healthnews;
-  @override
-  void initState() {
-    healthnews = HttpService.getHealthNews();
-    super.initState();
-  }
-
+  Future<News> technologynews;
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
@@ -58,7 +47,7 @@ class _HealthState extends State<Health> {
         ],
       ),
       body: FutureBuilder<News>(
-          future: healthnews,
+          future: technologynews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -140,13 +129,19 @@ class _HealthState extends State<Health> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.healing),
-            title: Text('Health', style: GoogleFonts.cherrySwash()),
+            icon: IconButton(
+              icon: Icon(Icons.healing),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Health()));
+              },
+            ),
+            title: Text('Health',style: GoogleFonts.cherrySwash()),
           ),
            BottomNavigationBarItem(
             icon: IconButton(
-              icon: Icon(Icons.disc_full),
-              onPressed: () {
+              icon:Icon(Icons.disc_full),
+             onPressed: () {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => Entertainment()));
               },
@@ -154,14 +149,8 @@ class _HealthState extends State<Health> {
             title: Text('Entertainment', style: GoogleFonts.cherrySwash()),
           ),
           BottomNavigationBarItem(
-            icon: IconButton(
-              icon: Icon(Icons.computer),
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => TechPage()));
-              },
-            ),
-            title: Text('Tech', style: GoogleFonts.cherrySwash()),
+            icon: Icon(Icons.computer),
+            title: Text('Tech',style: GoogleFonts.cherrySwash()),
           ),
         ],
         onTap: (index) {
