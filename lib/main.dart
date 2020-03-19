@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nigeriannews/views/themestate.dart';
 import 'package:provider/provider.dart';
 import 'package:nigeriannews/views/hompage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() {
   // SharedPreferences.getInstance().then((prefs) {
