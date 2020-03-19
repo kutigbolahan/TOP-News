@@ -116,6 +116,7 @@ class _TechPageState extends State<TechPage> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: _currentindex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,

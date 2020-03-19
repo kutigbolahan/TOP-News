@@ -118,6 +118,7 @@ class _EntertainmentState extends State<Entertainment> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: _currentIndex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
@@ -125,6 +126,7 @@ class _EntertainmentState extends State<Entertainment> {
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
+             
               icon: Icon(Icons.directions_run),
               onPressed: () {
                 Navigator.of(context)

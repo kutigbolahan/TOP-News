@@ -121,6 +121,7 @@ class _HealthState extends State<Health> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: _currentindex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,

@@ -21,6 +21,13 @@ class SportsPage extends StatefulWidget {
 class _SportsPageState extends State<SportsPage> {
   int _currentindex =0;
   Future<News> sportsnews;
+  bool _isLoading ;
+
+  // @override
+  // void setState(fn) {
+  //   _isLoading = true;
+  //   super.setState(fn);
+  // }
 
   @override
   void initState() {
@@ -33,6 +40,7 @@ class _SportsPageState extends State<SportsPage> {
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
     return Scaffold(
+      
       appBar: AppBar(
         leading: Icon(
           Icons.flare,
@@ -57,7 +65,7 @@ class _SportsPageState extends State<SportsPage> {
               })
         ],
       ),
-      body: FutureBuilder<News>(
+      body:  FutureBuilder<News>(
           future: sportsnews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -116,6 +124,7 @@ class _SportsPageState extends State<SportsPage> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: _currentindex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
