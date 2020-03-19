@@ -20,7 +20,7 @@ class Health extends StatefulWidget {
 }
 
 class _HealthState extends State<Health> {
-  int _currentindex ;
+  int _currentindex =1;
 
   Future<News> healthnews;
   @override

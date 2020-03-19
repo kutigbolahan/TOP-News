@@ -19,7 +19,7 @@ class SportsPage extends StatefulWidget {
 }
 
 class _SportsPageState extends State<SportsPage> {
-  int _currentindex ;
+  int _currentindex =0;
   Future<News> sportsnews;
 
   @override

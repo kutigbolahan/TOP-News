@@ -46,13 +46,14 @@ class HttpService with ChangeNotifier {
    print("entertainNews total" + entertainnews.totalResults.toString());
    return entertainnews;
   }
+  
   static Future<News> getTechnologyNews()async{
    final String techUrl = 'http://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=7b2380f2052e4b2c9223e21021914f2e';
    final res =await http.get(techUrl);
 
    News technologynews = standardSerializers.deserializeWith(News.serializer, jsonDecode(res.body));
 
-   print("entertainNews total" + technologynews.totalResults.toString());
+   print("technologynews total" + technologynews.totalResults.toString());
    return technologynews;
   }
  

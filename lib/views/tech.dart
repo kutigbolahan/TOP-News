@@ -6,6 +6,7 @@ import 'package:nigeriannews/views/entertainment.dart';
 import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/sports.dart';
 import 'package:nigeriannews/views/themestate.dart';
+import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,9 +16,14 @@ class TechPage extends StatefulWidget {
 }
 
 class _TechPageState extends State<TechPage> {
-  int _currentindex;
+  int _currentindex=3;
 
   Future<News> technologynews;
+  @override
+  void initState() {
+    technologynews= HttpService.getTechnologyNews();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);

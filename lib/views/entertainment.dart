@@ -18,7 +18,7 @@ class Entertainment extends StatefulWidget {
 }
 
 class _EntertainmentState extends State<Entertainment> {
-  int _currentIndex;
+  int _currentIndex=2;
   Future<News> entertainnews;
 
   @override
