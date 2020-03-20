@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nigeriannews/views/splashscreen.dart';
 import 'package:nigeriannews/views/sports.dart';
 import 'package:nigeriannews/views/themestate.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
       theme: themeNotifier.getThemeData,
-        home: SportsPage(),
+        home: Splash(),
         debugShowCheckedModeBanner: false,
       );
   }
