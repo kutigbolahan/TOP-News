@@ -5,11 +5,12 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 class Splash extends StatelessWidget {
   final pages = [
     Container(
+     
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,7 +25,7 @@ class Splash extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 50, right: 10),
                 child: Text('Skip', style: GoogleFonts.blinker(fontSize: 25,
-                
+                color: Colors.grey
                 )),
               ),
             ]),
@@ -34,28 +35,28 @@ class Splash extends StatelessWidget {
                 alignment: Alignment.center,
                 child: Image.asset(
                   'assets/images/6.png',
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fitWidth,
                 )),
             SizedBox(height: 30),
              Container(
               child: Text(
-                  'BE \n UPDATED.',
+                  'Welcome to Top News.',
                   style: GoogleFonts.blinker(
                       fontSize: 35,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       wordSpacing: 1.5,
-                      color: Colors.grey
+                      color: Colors.black
                       )),
             ),
             SizedBox(height: 20),
             Container(
               child: Text(
-                  'Be updated about the latest \n happening around the world.',
+                  'Get latest news\nat your finger tips.',
                   style: GoogleFonts.blinker(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
                       wordSpacing: 1.5,
-                      color: Colors.black
+                      color: Colors.grey
                       )),
             )
           ],
