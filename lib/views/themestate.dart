@@ -8,6 +8,8 @@ final darkTheme = ThemeData(
   accentColor: Colors.white,
   accentIconTheme: IconThemeData(color:Colors.black),
   dividerColor: Colors.black12,
+  //bottomAppBarColor:  const Color(0xff212121),
+  
   
 );
 final lightTheme = ThemeData(
@@ -17,7 +19,9 @@ final lightTheme = ThemeData(
   backgroundColor: const Color(0xffe5e5e5),
   accentColor: Colors.black,
   accentIconTheme: IconThemeData(color:Colors.white),
-  dividerColor: Colors.white54
+  dividerColor: Colors.white54,
+  // bottomAppBarColor:  const Color(0xffe5e5e5),
+   
 );
 
 class ThemeNotifier with ChangeNotifier{
@@ -39,3 +43,22 @@ class ThemeNotifier with ChangeNotifier{
 
   
 }
+// class ThemeNotifier with ChangeNotifier{
+  
+//    bool isLightTheme;
+
+//   ThemeNotifier({this.isLightTheme});
+
+//   ThemeData get getThemeData => isLightTheme ? lightTheme : darkTheme;
+
+//  set setThemeData(bool val) {
+//     if (val) {
+//       isLightTheme = true;
+//     } else {
+//       isLightTheme = false;
+//     }
+//     notifyListeners();
+//   }
+
+  
+// }

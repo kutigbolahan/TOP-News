@@ -86,7 +86,7 @@ class _SportsPageState extends State<SportsPage> {
                                       height: 20,
                                       child: CircularProgressIndicator()),
                                 )
-                              : Container()),
+                              : CircularProgressIndicator()),
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,10 +121,11 @@ class _SportsPageState extends State<SportsPage> {
             }
           }),
       bottomNavigationBar: BottomNavigationBar(
+        
         type: BottomNavigationBarType.shifting,
         currentIndex: _currentindex,
-        backgroundColor: Colors.black,
-        selectedItemColor: Colors.white,
+       // backgroundColor: Colors.black,
+       // selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
