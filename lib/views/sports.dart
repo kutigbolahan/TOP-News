@@ -7,7 +7,7 @@ import 'package:nigeriannews/views/entertainment.dart';
 import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/tech.dart';
 import 'package:nigeriannews/views/themestate.dart';
-//import 'package:day_night_switch/day_night_switch.dart';
+
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,13 +22,9 @@ class SportsPage extends StatefulWidget {
 class _SportsPageState extends State<SportsPage> {
   int _currentindex =0;
   Future<News> sportsnews;
-  bool _isLoading ;
+  
 
-  // @override
-  // void setState(fn) {
-  //   _isLoading = true;
-  //   super.setState(fn);
-  // }
+  
 
   @override
   void initState() {

@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.5.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -33,8 +33,7 @@ dependencies:
   day_night_switch:
   shared_preferences:  
   cached_network_image:
-  liquid_swipe: ^1.4.0
-  intro_slider: ^2.2.9
+ 
   
 
 dev_dependencies:
