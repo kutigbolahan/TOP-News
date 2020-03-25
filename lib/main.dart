@@ -29,8 +29,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         
       theme: themeNotifier.getThemeData,
-        home: Splash(),
+        
         debugShowCheckedModeBanner: false,
+        home: IntroScreen(),
+       // initialRoute: '/',
+        // routes: {
+        //   SportsPage.routeName :(context) => SportsPage(),
+        //   Splash.routeName :(context) => Splash()
+        // },
       );
   }
 }

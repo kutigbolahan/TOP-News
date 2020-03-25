@@ -14,6 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SportsPage extends StatefulWidget {
+  static String routeName = 'sports';
   @override
   _SportsPageState createState() => _SportsPageState();
 }

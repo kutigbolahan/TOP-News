@@ -34,6 +34,7 @@ dependencies:
   shared_preferences:  
   cached_network_image:
   liquid_swipe: ^1.4.0
+  intro_slider: ^2.2.9
   
 
 dev_dependencies:
