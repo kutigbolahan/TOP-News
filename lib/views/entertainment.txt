@@ -2,26 +2,28 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nigeriannews/model/articles.dart';
-import 'package:nigeriannews/views/entertainment.dart';
 import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/sports.dart';
+import 'package:nigeriannews/views/tech.dart';
 import 'package:nigeriannews/views/themestate.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TechPage extends StatefulWidget {
+class Entertainment extends StatefulWidget {
+  Entertainment({Key key}) : super(key: key);
+
   @override
-  _TechPageState createState() => _TechPageState();
+  _EntertainmentState createState() => _EntertainmentState();
 }
 
-class _TechPageState extends State<TechPage> {
-  int _currentindex=3;
+class _EntertainmentState extends State<Entertainment> {
+  int _currentIndex=0;
+  Future<News> entertainnews;
 
-  Future<News> technologynews;
   @override
   void initState() {
-    technologynews= HttpService.getTechnologyNews();
+    entertainnews = HttpService.getEntertainmentNews();
     super.initState();
   }
   @override
@@ -53,7 +55,7 @@ class _TechPageState extends State<TechPage> {
         ],
       ),
       body: FutureBuilder<News>(
-          future: technologynews,
+          future: entertainnews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -117,13 +119,14 @@ class _TechPageState extends State<TechPage> {
           }),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
-        currentIndex: _currentindex,
+        currentIndex: _currentIndex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
+             
               icon: Icon(Icons.directions_run),
               onPressed: () {
                 Navigator.of(context)
@@ -145,24 +148,25 @@ class _TechPageState extends State<TechPage> {
             ),
             title: Text('Health',style: GoogleFonts.cherrySwash()),
           ),
-           BottomNavigationBarItem(
-            icon: IconButton(
-              icon:Icon(Icons.disc_full),
-             onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Entertainment()));
-              },
-            ),
-            title: Text('Entertainment', style: GoogleFonts.cherrySwash()),
+            BottomNavigationBarItem(
+            icon: Icon(Icons.disc_full),
+            title: Text('Entertainment',style: GoogleFonts.cherrySwash()),
+          
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.computer),
-            title: Text('Tech',style: GoogleFonts.cherrySwash()),
+            icon: IconButton(
+              icon: Icon(Icons.computer),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => TechPage()));
+              },
+            ),
+            title: Text('Tech', style: GoogleFonts.cherrySwash()),
           ),
         ],
         onTap: (index) {
           setState(() {
-            _currentindex = index;
+            _currentIndex = index;
           });
         },
       ),
