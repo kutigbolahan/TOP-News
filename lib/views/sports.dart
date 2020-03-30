@@ -77,7 +77,9 @@ class _SportsPageState extends State<SportsPage> {
                   // future: news,
 
                   builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                    var snap = snapshot.hasData;
+                    print(snap);
+                if (snapshot.hasData ) {
                   return  ListView.builder(
                       itemCount: snapshot.data.articles.length,
                       itemBuilder: (context, index) {
