@@ -1,34 +1,32 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:nigeriannews/model/articles.dart';
-import 'package:nigeriannews/views/health.dart';
-import 'package:nigeriannews/views/sports.dart';
-import 'package:nigeriannews/views/tech.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// import 'package:nigeriannews/views/sports.dart';
+
 import 'package:nigeriannews/views/themestate.dart';
+
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Entertainment extends StatefulWidget {
-  Entertainment({Key key}) : super(key: key);
-
+class Health extends StatefulWidget {
   @override
-  _EntertainmentState createState() => _EntertainmentState();
+  _HealthState createState() => _HealthState();
 }
 
-class _EntertainmentState extends State<Entertainment> {
-  int _currentIndex=0;
-  Future<News> entertainnews;
+class _HealthState extends State<Health> {
+  int _currentindex =0;
 
-  @override
-  void initState() {
-    entertainnews = HttpService.getEntertainmentNews();
-    super.initState();
-  }
+
+
   @override
   Widget build(BuildContext context) {
     final themeNotifier = Provider.of<ThemeNotifier>(context);
+  final  healthnews = Provider.of<HttpService>(context).getHealthNews();
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -55,7 +53,7 @@ class _EntertainmentState extends State<Entertainment> {
         ],
       ),
       body: FutureBuilder<News>(
-          future: entertainnews,
+          future: healthnews,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
@@ -119,18 +117,17 @@ class _EntertainmentState extends State<Entertainment> {
           }),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
-        currentIndex: _currentIndex,
+        currentIndex: _currentindex,
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
         items: [
           BottomNavigationBarItem(
             icon: IconButton(
-             
               icon: Icon(Icons.directions_run),
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => SportsPage()));
+                // Navigator.of(context)
+                //     .push(MaterialPageRoute(builder: (context) => SportsPage()));
               },
             ),
             title: Text(
@@ -139,34 +136,16 @@ class _EntertainmentState extends State<Entertainment> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: IconButton(
-              icon: Icon(Icons.healing),
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Health()));
-              },
-            ),
-            title: Text('Health',style: GoogleFonts.cherrySwash()),
+            icon: Icon(Icons.healing),
+            title: Text('Health', style: GoogleFonts.cherrySwash()),
           ),
-            BottomNavigationBarItem(
-            icon: Icon(Icons.disc_full),
-            title: Text('Entertainment',style: GoogleFonts.cherrySwash()),
           
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              icon: Icon(Icons.computer),
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => TechPage()));
-              },
-            ),
-            title: Text('Tech', style: GoogleFonts.cherrySwash()),
-          ),
+           
+        
         ],
         onTap: (index) {
           setState(() {
-            _currentIndex = index;
+            _currentindex = index;
           });
         },
       ),

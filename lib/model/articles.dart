@@ -7,6 +7,8 @@ import 'package:built_value/serializer.dart';
 part 'articles.g.dart';
 
 
+
+
 abstract class News implements Built<News, NewsBuilder> {
   // Fields
   String get status;

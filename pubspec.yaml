@@ -33,6 +33,7 @@ dependencies:
   day_night_switch:
   shared_preferences:  
   cached_network_image:
+  flutter_spinkit: ^4.1.2+1
  
   
 

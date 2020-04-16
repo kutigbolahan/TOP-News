@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nigeriannews/model/articles.dart';
 import 'package:nigeriannews/model/slidemodel.dart';
+import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/views/sports.dart';
+import 'package:nigeriannews/viewsmodel/news.dart';
 
 class SlideItem extends StatelessWidget {
   final int index;
 
-  const SlideItem(this.index);
+  const SlideItem(this.index, );
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class SlideItem extends StatelessWidget {
             
             child: Text('Get Started'),
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> SportsPage() ));
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;   // (context, MaterialPageRoute(builder: (context)=> Sports( )));
             }),
         )
       ],
