@@ -13,16 +13,17 @@ class Sports extends StatefulWidget {
 }
 
 class _SportsState extends State<Sports> {
-  int _currentIndex;
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-     final sportsnews =Provider.of<HttpService>(context,listen: false).getSportsNews();
+    final sportsnews =
+        Provider.of<HttpService>(context, listen: false).getSportsNews();
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Sports News')),
       ),
       body: FutureBuilder<News>(
-         future: sportsnews,
+        future: sportsnews,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
@@ -62,15 +63,17 @@ class _SportsState extends State<Sports> {
                         children: <Widget>[
                           Text(
                               'Author: ${snapshot.data.articles[index].author ?? 0} '),
-                          IconButton(icon: Icon(Icons.launch), onPressed: () async{
-                             final url =
+                          IconButton(
+                              icon: Icon(Icons.launch),
+                              onPressed: () async {
+                                final url =
                                     '${snapshot.data.articles[index].url}';
                                 if (await canLaunch(url)) {
                                   launch(url);
                                 } else {
                                   throw 'cant launch url';
                                 }
-                          })
+                              })
                         ],
                       )
                     ],
@@ -82,38 +85,35 @@ class _SportsState extends State<Sports> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-          type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
             title: Text('Sports'),
-            icon: Icon(Icons.directions_run),
-            
-            ),
+              icon: IconButton(
+                  icon: Icon(Icons.healing),
+                  onPressed: () {
+                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;
+                  })
+          ),
           BottomNavigationBarItem(
-            title: Text('Health'),
-            icon: IconButton(
-              icon: Icon(Icons.healing),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Health()));
-              }
-              
-              
-            )
-            
-            ),
-            
+              title: Text('Health'),
+              icon: IconButton(
+                  icon: Icon(Icons.healing),
+                  onPressed: () {
+                   Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Health()), (route) => false) ;
+                  })),
         ],
-        onTap: (index){
+        onTap: (index) {
           // if (index==0) {
           //   Provider.of<HttpService>(context,listen: false).getSportsNews();
           // }else{
           //    Provider.of<HttpService>(context,listen: false).();
           // }
           setState(() {
-            _currentIndex =index;
+            _currentIndex = index;
           });
         },
-        ),
+      ),
     );
   }
 }

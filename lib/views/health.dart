@@ -6,6 +6,7 @@ import 'package:nigeriannews/model/articles.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:nigeriannews/views/sports.dart';
 
 class Health extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class Health extends StatefulWidget {
 }
 
 class _HealthState extends State<Health> {
-  int _currentIndex;
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
      final healthNews =Provider.of<HttpService>(context,listen: false).getHealthNews();
@@ -89,7 +90,7 @@ class _HealthState extends State<Health> {
            icon: IconButton(
               icon: Icon(Icons.healing),
               onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Health()));
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;
               }
               
               
@@ -101,7 +102,7 @@ class _HealthState extends State<Health> {
             icon: IconButton(
               icon: Icon(Icons.healing),
               onPressed: (){
-                
+               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Health()), (route) => false) ;
               }
               
               
