@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nigeriannews/model/articles.dart';
+
 import 'package:nigeriannews/model/slidemodel.dart';
-import 'package:nigeriannews/views/health.dart';
+
 import 'package:nigeriannews/views/sports.dart';
-import 'package:nigeriannews/viewsmodel/news.dart';
+
 
 class SlideItem extends StatelessWidget {
   final int index;

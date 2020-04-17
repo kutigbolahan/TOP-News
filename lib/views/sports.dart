@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nigeriannews/model/articles.dart';
+import 'package:nigeriannews/views/health.dart';
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Sports extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class Sports extends StatefulWidget {
 }
 
 class _SportsState extends State<Sports> {
-  int _currentIndex = 0;
+  int _currentIndex;
   @override
   Widget build(BuildContext context) {
      final sportsnews =Provider.of<HttpService>(context,listen: false).getSportsNews();
@@ -60,7 +62,15 @@ class _SportsState extends State<Sports> {
                         children: <Widget>[
                           Text(
                               'Author: ${snapshot.data.articles[index].author ?? 0} '),
-                          IconButton(icon: Icon(Icons.launch), onPressed: () {})
+                          IconButton(icon: Icon(Icons.launch), onPressed: () async{
+                             final url =
+                                    '${snapshot.data.articles[index].url}';
+                                if (await canLaunch(url)) {
+                                  launch(url);
+                                } else {
+                                  throw 'cant launch url';
+                                }
+                          })
                         ],
                       )
                     ],
@@ -72,6 +82,7 @@ class _SportsState extends State<Sports> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+          type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
             title: Text('Sports'),
@@ -82,7 +93,9 @@ class _SportsState extends State<Sports> {
             title: Text('Health'),
             icon: IconButton(
               icon: Icon(Icons.healing),
-              onPressed: (){}
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> Health()));
+              }
               
               
             )
