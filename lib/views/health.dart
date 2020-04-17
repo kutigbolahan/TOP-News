@@ -20,6 +20,13 @@ class _HealthState extends State<Health> {
      final healthNews =Provider.of<HttpService>(context,listen: false).getHealthNews();
     return Scaffold(
       appBar: AppBar(
+        elevation: .0,
+          leading: Padding(
+         padding: const EdgeInsets.all(8.0),
+         child: CircleAvatar(
+           backgroundImage:AssetImage('assets/images/news.png'),
+         ),
+       ) ,  
         title: Center(child: Text('Health News')),
       ),
       body: FutureBuilder<News>(
