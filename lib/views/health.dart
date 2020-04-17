@@ -14,7 +14,7 @@ class Health extends StatefulWidget {
 }
 
 class _HealthState extends State<Health> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
      final healthNews =Provider.of<HttpService>(context,listen: false).getHealthNews();
@@ -88,7 +88,7 @@ class _HealthState extends State<Health> {
           BottomNavigationBarItem(
             title: Text('Sports'),
            icon: IconButton(
-              icon: Icon(Icons.healing),
+              icon: Icon(Icons.directions_run),
               onPressed: (){
                 Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;
               }
@@ -99,6 +99,8 @@ class _HealthState extends State<Health> {
             ),
           BottomNavigationBarItem(
             title: Text('Health'),
+            
+            
             icon: IconButton(
               icon: Icon(Icons.healing),
               onPressed: (){
@@ -112,11 +114,7 @@ class _HealthState extends State<Health> {
             
         ],
         onTap: (index){
-          // if (index==0) {
-          //   Provider.of<HttpService>(context,listen: false).getSportsNews();
-          // }else{
-          //    Provider.of<HttpService>(context,listen: false).();
-          // }
+         
           setState(() {
             _currentIndex =index;
           });

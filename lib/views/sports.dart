@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:nigeriannews/model/articles.dart';
 import 'package:nigeriannews/views/health.dart';
+
 import 'package:nigeriannews/viewsmodel/news.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class Sports extends StatefulWidget {
   @override
@@ -16,11 +18,25 @@ class _SportsState extends State<Sports> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    
     final sportsnews =
         Provider.of<HttpService>(context, listen: false).getSportsNews();
     return Scaffold(
+      
       appBar: AppBar(
-        title: Center(child: Text('Sports News')),
+        
+        elevation: 0.0,
+        
+       leading: Padding(
+         padding: const EdgeInsets.all(8.0),
+         child: CircleAvatar(
+           backgroundImage:AssetImage('assets/images/news.png'),
+         ),
+       ) ,  
+        title: Center(child: Text('Sports News'),
+        
+        ),
+        
       ),
       body: FutureBuilder<News>(
         future: sportsnews,
@@ -84,13 +100,17 @@ class _SportsState extends State<Sports> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 0,
+      
+        // unselectedItemColor: Colors.grey,
+        // selectedItemColor: Colors.black,
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
             title: Text('Sports'),
               icon: IconButton(
-                  icon: Icon(Icons.healing),
+                  icon: Icon(Icons.directions_run),
                   onPressed: () {
                      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;
                   })
@@ -104,11 +124,11 @@ class _SportsState extends State<Sports> {
                   })),
         ],
         onTap: (index) {
-          // if (index==0) {
-          //   Provider.of<HttpService>(context,listen: false).getSportsNews();
-          // }else{
-          //    Provider.of<HttpService>(context,listen: false).();
-          // }
+          if (index==0) {
+            Provider.of<HttpService>(context,listen: false).getSportsNews();
+          }else{
+             Provider.of<HttpService>(context,listen: false).getHealthNews();
+          }
           setState(() {
             _currentIndex = index;
           });
