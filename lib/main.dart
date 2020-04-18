@@ -29,13 +29,22 @@ class MyApp extends StatelessWidget {
 }
 
 class MaterialAppWithTheme extends StatelessWidget {
+   static const primaryColor = Colors.white;
   @override
   Widget build(BuildContext context) {
     
     return MaterialApp(
        debugShowCheckedModeBanner: false,
         home: SplashScreen(),
-        theme:ThemeData.dark()
-    );
+        theme: ThemeData(
+          primaryColor: primaryColor,
+          scaffoldBackgroundColor: primaryColor,
+          canvasColor: Colors.black,
+          textTheme: Theme.of(context).textTheme.copyWith(
+              caption: TextStyle(color: Colors.white54),
+             
+          // primaryColor: Color(0xffde03),
+          ),
+        ));
   }
 }

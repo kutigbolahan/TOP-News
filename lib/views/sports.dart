@@ -22,9 +22,9 @@ class _SportsState extends State<Sports> {
     final sportsnews =
         Provider.of<HttpService>(context, listen: false).getSportsNews();
     return Scaffold(
-      
+       backgroundColor: Colors.white,
       appBar: AppBar(
-        
+        backgroundColor: Colors.white,
         elevation: 0.0,
         
        leading: Padding(
@@ -68,7 +68,7 @@ class _SportsState extends State<Sports> {
                             : Container(
                                 child: Center(
                                 child: SpinKitFadingCircle(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   size: 50,
                                 ),
                               ))),
@@ -101,7 +101,7 @@ class _SportsState extends State<Sports> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
-      
+      backgroundColor: Colors.black,
         // unselectedItemColor: Colors.grey,
         // selectedItemColor: Colors.black,
         currentIndex: _currentIndex,
