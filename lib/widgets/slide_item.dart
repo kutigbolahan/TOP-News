@@ -49,7 +49,7 @@ class SlideItem extends StatelessWidget {
           child: FlatButton(
             color: Colors.black,
             
-            child: Text('Get Started'),
+            child: Text('Get Started',style: TextStyle(color:Colors.white),),
             onPressed: (){
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;   // (context, MaterialPageRoute(builder: (context)=> Sports( )));
             }),
