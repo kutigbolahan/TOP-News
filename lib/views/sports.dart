@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nigeriannews/model/articles.dart';
 import 'package:nigeriannews/views/health.dart';
 
 import 'package:nigeriannews/viewsmodel/news.dart';
+import 'package:nigeriannews/widgets/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -17,11 +19,18 @@ class _SportsState extends State<Sports> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeState>(context);
     final sportsnews =
         Provider.of<HttpService>(context, listen: false).getSportsNews();
     return Scaffold(
-      backgroundColor: Colors.white,
+     // backgroundColor: Colors.white,
       appBar: AppBar(
+      
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.color_lens, color: Colors.black,), onPressed: (){
+            theme.setTheme();
+          })
+        ],
         backgroundColor: Colors.white,
         elevation: 0.0,
         leading: Padding(
@@ -31,7 +40,9 @@ class _SportsState extends State<Sports> {
           ),
         ),
         title: Center(
-          child: Text('Sports News'),
+          child: Text('Sports News', style: TextStyle(
+            color: Colors.black
+          ),),
         ),
       ),
       body: FutureBuilder<News>(
@@ -56,7 +67,7 @@ class _SportsState extends State<Sports> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(.0),
                         child: IconButton(
                           
                             icon: Icon(Icons.star_border), onPressed: () {}),
@@ -66,11 +77,19 @@ class _SportsState extends State<Sports> {
                           height: 70,
                           child: snapshot.data.articles[index].urlToImage !=
                                   null
-                              ? CachedNetworkImage(
+                               ? 
+                              CachedNetworkImage(
                                   imageUrl:
                                       snapshot.data.articles[index].urlToImage,
                                   fit: BoxFit.contain,
-                                  placeholder: (context, url) => Container(),
+                                  placeholder: (context, url) => Container(
+                                    child: Center(
+                                  child: SpinKitFadingCircle(
+                                    color: Colors.black,
+                                    size: 50,
+                                  ),
+                                ),
+                                  ),
                                 )
                               : Container(
                                   child: Center(
@@ -78,7 +97,9 @@ class _SportsState extends State<Sports> {
                                     color: Colors.black,
                                     size: 50,
                                   ),
-                                ))),
+                                ),
+                                ),
+                                ),
                     ]),
                     title: Text(snapshot.data.articles[index].title),
                     children: <Widget>[
@@ -109,9 +130,9 @@ class _SportsState extends State<Sports> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 0,
-        backgroundColor: Colors.black,
-        // unselectedItemColor: Colors.grey,
-        // selectedItemColor: Colors.black,
+        //backgroundColor: Colors.black,
+        // unselectedItemColor: Colors.black,
+         //selectedItemColor: Colors.black,
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.shifting,
         items: [

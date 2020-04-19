@@ -1,5 +1,7 @@
 import 'package:moor_flutter/moor_flutter.dart';
 
+part 'favourites.g.dart';
+
 class Favourites extends Table{
   IntColumn get id => integer().autoIncrement()();
   TextColumn get author => text()();

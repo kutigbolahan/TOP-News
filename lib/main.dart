@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:nigeriannews/views/splashscreen.dart';
 
 
 import 'package:nigeriannews/viewsmodel/news.dart';
+import 'package:nigeriannews/widgets/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,6 +23,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<HttpService>(
           create: (context) => HttpService(),
         ),
+        ChangeNotifierProvider<ThemeState>(
+          create: (context) => ThemeState(),
+        ),
       ],
       child: MaterialAppWithTheme(
        
@@ -29,22 +35,23 @@ class MyApp extends StatelessWidget {
 }
 
 class MaterialAppWithTheme extends StatelessWidget {
-   static const primaryColor = Colors.white;
+  // static const primaryColor = Colors.white;
   @override
   Widget build(BuildContext context) {
-    
+    final themeData= Provider.of<ThemeState>(context);
     return MaterialApp(
        debugShowCheckedModeBanner: false,
         home: SplashScreen(),
-        theme: ThemeData(
-          primaryColor: primaryColor,
-          scaffoldBackgroundColor: primaryColor,
-          canvasColor: Colors.black,
-          textTheme: Theme.of(context).textTheme.copyWith(
-              caption: TextStyle(color: Colors.white54),
-             
-          // primaryColor: Color(0xffde03),
-          ),
-        ));
+        theme: themeData.getTheme()
+        
+        // ThemeData(
+        //   primaryColor: primaryColor,
+        //   scaffoldBackgroundColor: primaryColor,
+        //   canvasColor: Colors.black,
+          
+         
+          
+        // ),
+        );
   }
 }

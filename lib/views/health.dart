@@ -17,20 +17,21 @@ class _HealthState extends State<Health> {
   int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
-     final healthNews =Provider.of<HttpService>(context,listen: false).getHealthNews();
+    final healthNews =
+        Provider.of<HttpService>(context, listen: false).getHealthNews();
     return Scaffold(
       appBar: AppBar(
         elevation: .0,
-          leading: Padding(
-         padding: const EdgeInsets.all(8.0),
-         child: CircleAvatar(
-           backgroundImage:AssetImage('assets/images/news.png'),
-         ),
-       ) ,  
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/news.png'),
+          ),
+        ),
         title: Center(child: Text('Health News')),
       ),
       body: FutureBuilder<News>(
-         future: healthNews,
+        future: healthNews,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
@@ -46,7 +47,17 @@ class _HealthState extends State<Health> {
                 itemCount: snapshot.data.articles.length,
                 itemBuilder: (context, index) {
                   return ExpansionTile(
-                    leading: Container(
+                    leading: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                         Padding(
+                        padding: const EdgeInsets.all(.0),
+                        child: IconButton(
+                          
+                            icon: Icon(Icons.star_border), onPressed: () {}),
+                      ),
+                      Container(
                         width: 70,
                         height: 70,
                         child: snapshot.data.articles[index].urlToImage != null
@@ -54,31 +65,45 @@ class _HealthState extends State<Health> {
                                 imageUrl:
                                     snapshot.data.articles[index].urlToImage,
                                 fit: BoxFit.contain,
-                                placeholder: (context, url) => Container(),
+                                placeholder: (context, url) => Container(
+                                  child: Center(
+                                    child: SpinKitFadingCircle(
+                                      color: Colors.black,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ),
                               )
                             : Container(
                                 child: Center(
-                                child: SpinKitFadingCircle(
-                                  color: Colors.white,
-                                  size: 50,
+                                  child: SpinKitFadingCircle(
+                                    color: Colors.black,
+                                    size: 50,
+                                  ),
                                 ),
-                              ))),
+                              ),
+                      ),
+                    ]),
                     title: Text(snapshot.data.articles[index].title),
+                    
                     children: <Widget>[
+                     
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Text(
                               'Author: ${snapshot.data.articles[index].author ?? 0} '),
-                          IconButton(icon: Icon(Icons.launch), onPressed: () async{
-                             final url =
+                          IconButton(
+                              icon: Icon(Icons.launch),
+                              onPressed: () async {
+                                final url =
                                     '${snapshot.data.articles[index].url}';
                                 if (await canLaunch(url)) {
                                   launch(url);
                                 } else {
                                   throw 'cant launch url';
                                 }
-                          })
+                              })
                         ],
                       )
                     ],
@@ -90,43 +115,35 @@ class _HealthState extends State<Health> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-          type: BottomNavigationBarType.shifting,
+        type: BottomNavigationBarType.shifting,
         items: [
           BottomNavigationBarItem(
-            title: Text('Sports'),
-           icon: IconButton(
-              icon: Icon(Icons.directions_run),
-              onPressed: (){
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Sports()), (route) => false) ;
-              }
-              
-              
-            )
-            
-            ),
+              title: Text('Sports'),
+              icon: IconButton(
+                  icon: Icon(Icons.directions_run),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Sports()),
+                        (route) => false);
+                  })),
           BottomNavigationBarItem(
-            title: Text('Health'),
-            
-            
-            icon: IconButton(
-              icon: Icon(Icons.healing),
-              onPressed: (){
-               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> Health()), (route) => false) ;
-              }
-              
-              
-            )
-            
-            ),
-            
+              title: Text('Health'),
+              icon: IconButton(
+                  icon: Icon(Icons.healing),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Health()),
+                        (route) => false);
+                  })),
         ],
-        onTap: (index){
-         
+        onTap: (index) {
           setState(() {
-            _currentIndex =index;
+            _currentIndex = index;
           });
         },
-        ),
+      ),
     );
   }
 }
