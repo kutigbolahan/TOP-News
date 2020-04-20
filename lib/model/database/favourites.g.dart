@@ -8,24 +8,22 @@ part of 'favourites.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Favourite extends DataClass implements Insertable<Favourite> {
-  final int id;
   final String author;
   final String title;
   final String description;
   final String url;
+  final String content;
   Favourite(
-      {@required this.id,
-      @required this.author,
+      {@required this.author,
       @required this.title,
       @required this.description,
-      @required this.url});
+      @required this.url,
+      @required this.content});
   factory Favourite.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
-    final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     return Favourite(
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       author:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}author']),
       title:
@@ -33,35 +31,36 @@ class Favourite extends DataClass implements Insertable<Favourite> {
       description: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}description']),
       url: stringType.mapFromDatabaseResponse(data['${effectivePrefix}url']),
+      content:
+          stringType.mapFromDatabaseResponse(data['${effectivePrefix}content']),
     );
   }
   factory Favourite.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Favourite(
-      id: serializer.fromJson<int>(json['id']),
       author: serializer.fromJson<String>(json['author']),
       title: serializer.fromJson<String>(json['title']),
       description: serializer.fromJson<String>(json['description']),
       url: serializer.fromJson<String>(json['url']),
+      content: serializer.fromJson<String>(json['content']),
     );
   }
   @override
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
       'author': serializer.toJson<String>(author),
       'title': serializer.toJson<String>(title),
       'description': serializer.toJson<String>(description),
       'url': serializer.toJson<String>(url),
+      'content': serializer.toJson<String>(content),
     };
   }
 
   @override
   FavouritesCompanion createCompanion(bool nullToAbsent) {
     return FavouritesCompanion(
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       author:
           author == null && nullToAbsent ? const Value.absent() : Value(author),
       title:
@@ -70,85 +69,89 @@ class Favourite extends DataClass implements Insertable<Favourite> {
           ? const Value.absent()
           : Value(description),
       url: url == null && nullToAbsent ? const Value.absent() : Value(url),
+      content: content == null && nullToAbsent
+          ? const Value.absent()
+          : Value(content),
     );
   }
 
   Favourite copyWith(
-          {int id,
-          String author,
+          {String author,
           String title,
           String description,
-          String url}) =>
+          String url,
+          String content}) =>
       Favourite(
-        id: id ?? this.id,
         author: author ?? this.author,
         title: title ?? this.title,
         description: description ?? this.description,
         url: url ?? this.url,
+        content: content ?? this.content,
       );
   @override
   String toString() {
     return (StringBuffer('Favourite(')
-          ..write('id: $id, ')
           ..write('author: $author, ')
           ..write('title: $title, ')
           ..write('description: $description, ')
-          ..write('url: $url')
+          ..write('url: $url, ')
+          ..write('content: $content')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode => $mrjf($mrjc(
-      id.hashCode,
-      $mrjc(author.hashCode,
-          $mrjc(title.hashCode, $mrjc(description.hashCode, url.hashCode)))));
+      author.hashCode,
+      $mrjc(title.hashCode,
+          $mrjc(description.hashCode, $mrjc(url.hashCode, content.hashCode)))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is Favourite &&
-          other.id == this.id &&
           other.author == this.author &&
           other.title == this.title &&
           other.description == this.description &&
-          other.url == this.url);
+          other.url == this.url &&
+          other.content == this.content);
 }
 
 class FavouritesCompanion extends UpdateCompanion<Favourite> {
-  final Value<int> id;
   final Value<String> author;
   final Value<String> title;
   final Value<String> description;
   final Value<String> url;
+  final Value<String> content;
   const FavouritesCompanion({
-    this.id = const Value.absent(),
     this.author = const Value.absent(),
     this.title = const Value.absent(),
     this.description = const Value.absent(),
     this.url = const Value.absent(),
+    this.content = const Value.absent(),
   });
   FavouritesCompanion.insert({
-    this.id = const Value.absent(),
     @required String author,
     @required String title,
     @required String description,
     @required String url,
+    @required String content,
   })  : author = Value(author),
         title = Value(title),
         description = Value(description),
-        url = Value(url);
+        url = Value(url),
+        content = Value(content);
   FavouritesCompanion copyWith(
-      {Value<int> id,
-      Value<String> author,
+      {Value<String> author,
       Value<String> title,
       Value<String> description,
-      Value<String> url}) {
+      Value<String> url,
+      Value<String> content}) {
     return FavouritesCompanion(
-      id: id ?? this.id,
       author: author ?? this.author,
       title: title ?? this.title,
       description: description ?? this.description,
       url: url ?? this.url,
+      content: content ?? this.content,
     );
   }
 }
@@ -158,15 +161,6 @@ class $FavouritesTable extends Favourites
   final GeneratedDatabase _db;
   final String _alias;
   $FavouritesTable(this._db, [this._alias]);
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
-  @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
-  }
-
   final VerificationMeta _authorMeta = const VerificationMeta('author');
   GeneratedTextColumn _author;
   @override
@@ -217,8 +211,21 @@ class $FavouritesTable extends Favourites
     );
   }
 
+  final VerificationMeta _contentMeta = const VerificationMeta('content');
+  GeneratedTextColumn _content;
   @override
-  List<GeneratedColumn> get $columns => [id, author, title, description, url];
+  GeneratedTextColumn get content => _content ??= _constructContent();
+  GeneratedTextColumn _constructContent() {
+    return GeneratedTextColumn(
+      'content',
+      $tableName,
+      false,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns =>
+      [author, title, description, url, content];
   @override
   $FavouritesTable get asDslTable => this;
   @override
@@ -229,9 +236,6 @@ class $FavouritesTable extends Favourites
   VerificationContext validateIntegrity(FavouritesCompanion d,
       {bool isInserting = false}) {
     final context = VerificationContext();
-    if (d.id.present) {
-      context.handle(_idMeta, id.isAcceptableValue(d.id.value, _idMeta));
-    }
     if (d.author.present) {
       context.handle(
           _authorMeta, author.isAcceptableValue(d.author.value, _authorMeta));
@@ -255,11 +259,17 @@ class $FavouritesTable extends Favourites
     } else if (isInserting) {
       context.missing(_urlMeta);
     }
+    if (d.content.present) {
+      context.handle(_contentMeta,
+          content.isAcceptableValue(d.content.value, _contentMeta));
+    } else if (isInserting) {
+      context.missing(_contentMeta);
+    }
     return context;
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
   @override
   Favourite map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -269,9 +279,6 @@ class $FavouritesTable extends Favourites
   @override
   Map<String, Variable> entityToSql(FavouritesCompanion d) {
     final map = <String, Variable>{};
-    if (d.id.present) {
-      map['id'] = Variable<int, IntType>(d.id.value);
-    }
     if (d.author.present) {
       map['author'] = Variable<String, StringType>(d.author.value);
     }
@@ -283,6 +290,9 @@ class $FavouritesTable extends Favourites
     }
     if (d.url.present) {
       map['url'] = Variable<String, StringType>(d.url.value);
+    }
+    if (d.content.present) {
+      map['content'] = Variable<String, StringType>(d.content.value);
     }
     return map;
   }
